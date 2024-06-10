@@ -2550,35 +2550,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Abdullah\\.nuget\\packages\\": {}
+    "/home/mdd/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Abdullah\\source\\repos\\eCommerce\\Infrastructure\\Infrastructure.csproj",
+      "projectUniqueName": "/home/mdd/RiderProjects/dotnet-ecommerce-api/Infrastructure/Infrastructure.csproj",
       "projectName": "Infrastructure",
-      "projectPath": "C:\\Users\\Abdullah\\source\\repos\\eCommerce\\Infrastructure\\Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\Abdullah\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Abdullah\\source\\repos\\eCommerce\\Infrastructure\\obj\\",
+      "projectPath": "/home/mdd/RiderProjects/dotnet-ecommerce-api/Infrastructure/Infrastructure.csproj",
+      "packagesPath": "/home/mdd/.nuget/packages/",
+      "outputPath": "/home/mdd/RiderProjects/dotnet-ecommerce-api/Infrastructure/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Abdullah\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/mdd/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Abdullah\\source\\repos\\eCommerce\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\Abdullah\\source\\repos\\eCommerce\\Core\\Core.csproj"
+            "/home/mdd/RiderProjects/dotnet-ecommerce-api/Core/Core.csproj": {
+              "projectPath": "/home/mdd/RiderProjects/dotnet-ecommerce-api/Core/Core.csproj"
             }
           }
         }
@@ -2587,11 +2584,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -2625,7 +2617,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

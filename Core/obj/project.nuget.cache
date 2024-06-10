@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6ksbvY6x+lw=",
+  "dgSpecHash": "qE3DqNch1/GUnMS4UOkAHcdY8wCtQTZLn9qxkfZ0oxZo1Uqv64ZHm+dWrBSdRMLfQ3y2SoZxgQPHYcLiLkWIMg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Abdullah\\source\\repos\\eCommerce\\Core\\Core.csproj",
+  "projectFilePath": "/home/mdd/RiderProjects/dotnet-ecommerce-api/Core/Core.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -1,20 +1,14 @@
 ﻿namespace Core.Helpers;
 
-public class PaginatedList<T>
+public class PaginatedList<T>(IEnumerable<T> items, int count, int pageNumber, int pageSize)
 {
-    public PaginatedList(IEnumerable<T> items, int count, int pageNumber, int pageSize)
+    public IEnumerable<T> Items { get; set; } = items;
+
+    public PaginationMetadata Metadata { get; set; } = new()
     {
-        Metadata = new PaginationMetadata
-        {
-            TotalCount = count,
-            PageSize = pageSize,
-            CurrentPage = pageNumber,
-            TotalPages = (int)Math.Ceiling(count / (double)pageSize)
-        };
-
-        Items = items;
-    }
-
-    public IEnumerable<T> Items { get; set; }
-    public PaginationMetadata Metadata { get; set; }
+        TotalCount = count,
+        PageSize = pageSize,
+        CurrentPage = pageNumber,
+        TotalPages = (int)Math.Ceiling(count / (double)pageSize)
+    };
 }
