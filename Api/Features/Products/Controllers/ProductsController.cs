@@ -9,11 +9,8 @@ namespace Api.Features.Products.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ProductsController(IProductService productService) : ControllerBase
+public class ProductsController(IProductService _productService) : ControllerBase
 {
-    private readonly IProductService _productService = productService;
-
-
     // GET: api/<ProductsController>
     [HttpGet]
     public async Task<IActionResult> Get([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10,

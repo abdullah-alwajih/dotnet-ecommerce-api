@@ -18,6 +18,8 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductBrandsRepository, ProductBrandsRepository>();
 builder.Services.AddScoped<IProductBrandsService, ProductBrandsService>();
+builder.Services.AddScoped<IProductTypesService, ProductTypesService>();
+builder.Services.AddScoped<IProductTypesRepository, ProductTypesRepository>();
 
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
