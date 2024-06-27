@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iJG4U2IK6iuxTsmTULwGQt0nFh4ycQmB258L5vujyCTTcExS4JoqQ6ycD6XWj815Ycl1eKxmQrtuTjeOq0uj4Q==",
+  "dgSpecHash": "ciesP899sieK39Q7HVBCBsgluusEHIJc/NNf1Jame+Z6T67OnDRz3Yo9N9QeGlrF91iWLTPGGM4l0y5JzwZeSg==",
   "success": true,
-  "projectFilePath": "/home/mdd/RiderProjects/dotnet-ecommerce-api/Tests/Tests.csproj",
+  "projectFilePath": "/Users/kaito/RiderProjects/dotnet-ecommerce-api/Tests/Tests.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

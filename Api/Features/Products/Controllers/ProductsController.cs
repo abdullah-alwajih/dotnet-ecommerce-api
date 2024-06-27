@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Api.Features.Products.Services;
 using Core.Entities;
+using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,18 +10,17 @@ namespace Api.Features.Products.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ProductsController(IProductService _productService) : ControllerBase
+public class ProductsController(IProductService productService) : ControllerBase
 {
     // GET: api/<ProductsController>
     [HttpGet]
-    public async Task<IActionResult> Get([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10,
-        [FromQuery] string? name = null)
+    public async Task<IActionResult> Get([FromQuery] BaseQueries queries)
     {
         Expression<Func<Product, bool>>? predicate = null;
 
-        if (!string.IsNullOrEmpty(name)) predicate = p => p.Name.Contains(name);
+        if (!string.IsNullOrEmpty(queries.Name)) predicate = p => p.ProductBrand.Name.Contains(queries.Name);
 
-        var products = await _productService.GetListAsync(
+        var products = await productService.GetListAsync(
             predicate,
             product => new
             {
@@ -33,8 +33,7 @@ public class ProductsController(IProductService _productService) : ControllerBas
                         product.ProductBrand.Id, product.ProductBrand.Name
                     }
             },
-            pageNumber,
-            pageSize
+            queries
         );
         return Ok(products);
     }

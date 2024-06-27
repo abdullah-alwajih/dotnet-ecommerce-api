@@ -1,6 +1,8 @@
-﻿namespace Core.Helpers;
+﻿using Core.Interfaces;
 
-public class PaginatedList<T>(IEnumerable<T> items, int count, int pageNumber, int pageSize)
+namespace Core.Helpers;
+
+public class PaginatedList<T>(IEnumerable<T> items, int count, int pageNumber, int pageSize) : IResultList<T>
 {
     public IEnumerable<T> Items { get; set; } = items;
 

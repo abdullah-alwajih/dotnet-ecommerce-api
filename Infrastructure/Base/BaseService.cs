@@ -12,13 +12,13 @@ public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : class
         Repository = repository;
     }
 
-    public virtual async Task<PaginatedList<TResult>> GetListAsync<TResult>(
+    public virtual async Task<IResultList<TResult>> GetListAsync<TResult>(
         Expression<Func<TEntity, bool>>? predicate = null,
         Expression<Func<TEntity, TResult>>? select = null,
-        int pageNumber = 1,
-        int pageSize = 10)
+        PaginationQueryParameters? paginationQueryParameters = null
+    )
     {
-        return await Repository.GetListAsync(predicate, select, pageNumber, pageSize);
+        return await Repository.GetListAsync(predicate, select, paginationQueryParameters);
     }
 
     public virtual async Task<TResult> GetByIdAsync<TResult>(int id, Expression<Func<TEntity, TResult>> selector)

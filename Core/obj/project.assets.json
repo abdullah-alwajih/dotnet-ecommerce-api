@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "/home/mdd/.nuget/packages/": {}
+    "/Users/kaito/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/mdd/RiderProjects/dotnet-ecommerce-api/Core/Core.csproj",
+      "projectUniqueName": "/Users/kaito/RiderProjects/dotnet-ecommerce-api/Core/Core.csproj",
       "projectName": "Core",
-      "projectPath": "/home/mdd/RiderProjects/dotnet-ecommerce-api/Core/Core.csproj",
-      "packagesPath": "/home/mdd/.nuget/packages/",
-      "outputPath": "/home/mdd/RiderProjects/dotnet-ecommerce-api/Core/obj/",
+      "projectPath": "/Users/kaito/RiderProjects/dotnet-ecommerce-api/Core/Core.csproj",
+      "packagesPath": "/Users/kaito/.nuget/packages/",
+      "outputPath": "/Users/kaito/RiderProjects/dotnet-ecommerce-api/Core/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/mdd/.nuget/NuGet/NuGet.Config"
+        "/Users/kaito/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -59,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.301/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/kaito/.dotnet/sdk/8.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -4,43 +4,47 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core.Interfaces;
 
-public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
+public class BaseRepository<TEntity>(DbContext context) : IBaseRepository<TEntity> where TEntity : class
 {
-    protected readonly DbContext Context;
-    protected readonly DbSet<TEntity> DbSet;
+    protected readonly DbContext Context = context;
+    protected readonly DbSet<TEntity> DbSet = context.Set<TEntity>();
 
-    public BaseRepository(DbContext context)
-    {
-        Context = context;
-        DbSet = context.Set<TEntity>();
-    }
-
-    public virtual async Task<PaginatedList<TResult>> GetListAsync<TResult>(
+    public virtual async Task<IResultList<TResult>> GetListAsync<TResult>(
         Expression<Func<TEntity, bool>>? predicate = null,
         Expression<Func<TEntity, TResult>>? select = null,
-        int pageNumber = 1,
-        int pageSize = 10)
+        PaginationQueryParameters? paginationQueryParameters = null
+    )
     {
-        var query = DbSet.AsNoTracking();
+        var baseQuery = DbSet.AsNoTracking();
 
         // Apply the predicate if it is provided
-        if (predicate != null) query = query.Where(predicate);
+        if (predicate != null) baseQuery = baseQuery.Where(predicate);
 
-        // Determine the query projection
-        var selectedQuery = select != null
-            ? query.Select(select)
-            : DefaultProjection<TResult>(query);
+        // Apply the projection if provided, else project to the same type
+        var finalQuery = select != null ? baseQuery.Select(select) : baseQuery.Cast<TResult>();
+
 
         // Compute total count of items matching the predicate (before pagination)
-        var count = await selectedQuery.CountAsync();
 
         // Apply pagination
-        var items = await selectedQuery.Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
+        if (paginationQueryParameters != null)
+        {
+            var count = await finalQuery.CountAsync();
+            var pageNumber = paginationQueryParameters.PageNumber;
+            var pageSize = paginationQueryParameters.PageSize; // Default to a large number if pageSize is not provided
 
-        // Return the paginated list
-        return new PaginatedList<TResult>(items, count, pageNumber, pageSize);
+            finalQuery = finalQuery.Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize);
+            var items = await finalQuery.ToListAsync();
+
+            // Return the paginated list
+            return new PaginatedList<TResult>(items, count, pageNumber, pageSize);
+        }
+        else
+        {
+            var items = await finalQuery.ToListAsync();
+            return new ResultList<TResult>(items);
+        }
     }
 
     public virtual async Task<TResult> GetByIdAsync<TResult>(int id, Expression<Func<TEntity, TResult>> selector)
@@ -71,12 +75,4 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
         await Context.SaveChangesAsync();
     }
 
-    private IQueryable<TResult> DefaultProjection<TResult>(IQueryable<TEntity> query)
-    {
-        // Check if TResult is the same as TEntity, allowing direct casting
-        if (typeof(TResult) == typeof(TEntity))
-            return (IQueryable<TResult>)query;
-        throw new InvalidOperationException(
-            "A select expression must be provided when TResult is not of type TEntity.");
-    }
 }

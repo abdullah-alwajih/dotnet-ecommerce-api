@@ -3,7 +3,6 @@ using Core.Interfaces;
 
 namespace Api.Features.Products.Repositories;
 
-public interface IProductTypesRepository  : IBaseRepository<ProductType>
+public interface IProductTypesRepository : IBaseRepository<ProductType>
 {
-    
 }

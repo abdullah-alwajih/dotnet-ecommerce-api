@@ -5,5 +5,4 @@ namespace Api.Features.Products.Services;
 
 public interface IProductTypesService : IBaseService<ProductType>
 {
-    
 }
