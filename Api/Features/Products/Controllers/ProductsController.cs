@@ -1,5 +1,8 @@
 ﻿using System.Linq.Expressions;
+using Api.Features.Products.DTOs;
 using Api.Features.Products.Services;
+using Api.Features.Products.specifications;
+using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -10,39 +13,42 @@ namespace Api.Features.Products.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ProductsController(IProductService productService) : ControllerBase
+public class ProductsController(IProductService productService, IMapper mapper) : ControllerBase
 {
     // GET: api/<ProductsController>
     [HttpGet]
     public async Task<IActionResult> Get([FromQuery] BaseQueries queries)
     {
-        Expression<Func<Product, bool>>? predicate = null;
+        try
+        {
+            var response = await productService.GetListAsync(
+                new BaseSpecification<Product>(pagination: queries)
+            );
 
-        if (!string.IsNullOrEmpty(queries.Name)) predicate = p => p.ProductBrand.Name.Contains(queries.Name);
-
-        var products = await productService.GetListAsync(
-            predicate,
-            product => new
-            {
-                product.Name,
-                product.Price,
-                ProductBrand = product.ProductBrand == null
-                    ? null
-                    : new
-                    {
-                        product.ProductBrand.Id, product.ProductBrand.Name
-                    }
-            },
-            queries
-        );
-        return Ok(products);
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, "An error occurred while processing your request.");
+        }
     }
 
     // GET api/<ProductsController>/5
     [HttpGet("{id}")]
-    public string Get(int id)
+    public async Task<IActionResult> Get(int id)
     {
-        return "value";
+        try
+        {
+            var response = await productService.GetByIdAsync
+            (
+                id
+            );
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            return NotFound(ex.Message);
+        }
     }
 
     // POST api/<ProductsController>

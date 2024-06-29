@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using Api.Features.Products.DTOs;
 using Api.Features.Products.Services;
 using Core.Entities;
 using Core.Interfaces;
@@ -14,14 +15,8 @@ public class ProductTypesController(IProductTypesService productTypesService) : 
     [HttpGet]
     public async Task<IActionResult> Get([FromQuery] BaseQueries queries)
     {
-        Expression<Func<ProductType, bool>>? predicate = null;
-
-        if (!string.IsNullOrEmpty(queries.Name)) predicate = p => p.Name.Contains(queries.Name);
-
         var productTypes = await productTypesService.GetListAsync(
-            predicate,
-            productTypes => new { productTypes.Name },
-            queries
+           new BaseSpecification<ProductType>(pagination: queries)
         );
         return Ok(productTypes);
     }

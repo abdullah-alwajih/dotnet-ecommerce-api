@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "rHm6vHlJ02OUzWqtd8z5XNnLxTGLgL1cZ4zcudiQATfuWRg7QLn+McIRflaGl6bpSmv+SnDmoYtZe5BP3SKxjQ==",
+  "dgSpecHash": "wrg6fuYuE/OKVySwWbV/OYwAhlbf7O8e/FDV5hpAMAvRmR7kNcLixVOSByEvtJmtQqSKwrw4lMMmeSDtKGlreg==",
   "success": true,
   "projectFilePath": "/Users/kaito/RiderProjects/dotnet-ecommerce-api/Core/Core.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/kaito/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
+    "/Users/kaito/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512"
+  ],
   "logs": []
 }

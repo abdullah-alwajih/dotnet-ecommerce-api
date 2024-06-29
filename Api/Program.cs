@@ -1,5 +1,7 @@
+using Api;
 using Api.Features.Products.Repositories;
 using Api.Features.Products.Services;
+using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,10 +14,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 
 // add scoped
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
+// builder.Services.AddScoped<typeof(IGenericRepository<>()), typeof(GenericRepository<>)>;
 builder.Services.AddScoped<IProductBrandsRepository, ProductBrandsRepository>();
 builder.Services.AddScoped<IProductBrandsService, ProductBrandsService>();
 builder.Services.AddScoped<IProductTypesService, ProductTypesService>();

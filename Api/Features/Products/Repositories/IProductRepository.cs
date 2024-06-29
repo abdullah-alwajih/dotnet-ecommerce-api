@@ -1,8 +1,9 @@
-﻿using Core.Entities;
+﻿using Api.Features.Products.DTOs;
+using Core.Entities;
 using Core.Interfaces;
 
 namespace Api.Features.Products.Repositories;
 
-public interface IProductRepository : IBaseRepository<Product>
+public interface IProductRepository : IGenericRepository<Product, ProductDto >
 {
 }

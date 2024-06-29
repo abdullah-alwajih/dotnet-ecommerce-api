@@ -1,43 +1,35 @@
 ﻿using System.Linq.Expressions;
-using Core.Helpers;
+using Core.Entities;
 
 namespace Core.Interfaces;
 
-public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : class
+public class BaseService<T, TDto>(IGenericRepository<T, TDto> repository) : IBaseService<T, TDto>
+    where T : BaseEntity
 {
-    protected readonly IBaseRepository<TEntity> Repository;
 
-    public BaseService(IBaseRepository<TEntity> repository)
+    public virtual async Task<IResultList<TDto>> GetListAsync(ISpecification<T> specification)
     {
-        Repository = repository;
+        return await repository.GetListAsync(specification);
+    }
+    
+
+    public virtual async Task<TDto> GetByIdAsync(int id)
+    {
+        return await repository.GetByIdAsync(id);
     }
 
-    public virtual async Task<IResultList<TResult>> GetListAsync<TResult>(
-        Expression<Func<TEntity, bool>>? predicate = null,
-        Expression<Func<TEntity, TResult>>? select = null,
-        PaginationQueryParameters? paginationQueryParameters = null
-    )
+    public virtual async Task AddAsync(T entity)
     {
-        return await Repository.GetListAsync(predicate, select, paginationQueryParameters);
+        await repository.AddAsync(entity);
     }
 
-    public virtual async Task<TResult> GetByIdAsync<TResult>(int id, Expression<Func<TEntity, TResult>> selector)
+    public virtual async Task UpdateAsync(T entity)
     {
-        return await Repository.GetByIdAsync(id, selector);
+        await repository.UpdateAsync(entity);
     }
 
-    public virtual async Task AddAsync(TEntity entity)
+    public virtual async Task RemoveAsync(T entity)
     {
-        await Repository.AddAsync(entity);
-    }
-
-    public virtual async Task UpdateAsync(TEntity entity)
-    {
-        await Repository.UpdateAsync(entity);
-    }
-
-    public virtual async Task RemoveAsync(TEntity entity)
-    {
-        await Repository.RemoveAsync(entity);
+        await repository.RemoveAsync(entity);
     }
 }

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "HltOOMc1okHdtl8/YRrDvlw4r1s8LbukDrGbqSsGrHp1X70bAGL1LuEWRTBqVf0WQBzXMGZnsTIg7n+WacwQqg==",
+  "dgSpecHash": "WbZLt9pl/qUpJJMkHXiqIfqY8xTIydv1enBn/zbrb9pbdVlPBT5TPK0EEPyB3LzbsIn4CGQmmGI9Hj6Q2kEUog==",
   "success": true,
   "projectFilePath": "/Users/kaito/RiderProjects/dotnet-ecommerce-api/Infrastructure/Infrastructure.csproj",
   "expectedPackageFiles": [
+    "/Users/kaito/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
     "/Users/kaito/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/kaito/.nuget/packages/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "/Users/kaito/.nuget/packages/microsoft.codeanalysis.analyzers/3.3.3/microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",
@@ -11,6 +12,7 @@
     "/Users/kaito/.nuget/packages/microsoft.codeanalysis.csharp/4.5.0/microsoft.codeanalysis.csharp.4.5.0.nupkg.sha512",
     "/Users/kaito/.nuget/packages/microsoft.codeanalysis.csharp.workspaces/4.5.0/microsoft.codeanalysis.csharp.workspaces.4.5.0.nupkg.sha512",
     "/Users/kaito/.nuget/packages/microsoft.codeanalysis.workspaces.common/4.5.0/microsoft.codeanalysis.workspaces.common.4.5.0.nupkg.sha512",
+    "/Users/kaito/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/Users/kaito/.nuget/packages/microsoft.data.sqlite.core/8.0.6/microsoft.data.sqlite.core.8.0.6.nupkg.sha512",
     "/Users/kaito/.nuget/packages/microsoft.entityframeworkcore/8.0.6/microsoft.entityframeworkcore.8.0.6.nupkg.sha512",
     "/Users/kaito/.nuget/packages/microsoft.entityframeworkcore.abstractions/8.0.6/microsoft.entityframeworkcore.abstractions.8.0.6.nupkg.sha512",

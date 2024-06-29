@@ -1,3 +1,4 @@
+using Api.Features.Products.DTOs;
 using Api.Features.Products.Repositories;
 using Core.Entities;
 using Core.Interfaces;
@@ -5,6 +6,6 @@ using Core.Interfaces;
 namespace Api.Features.Products.Services;
 
 public class ProductTypesService(IProductTypesRepository productTypesRepository)
-    : BaseService<ProductType>(productTypesRepository), IProductTypesService
+    : BaseService<ProductType, ProductTypeDto>(productTypesRepository), IProductTypesService
 {
 }

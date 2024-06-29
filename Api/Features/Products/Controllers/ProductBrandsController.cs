@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using Api.Features.Products.DTOs;
 using Api.Features.Products.Services;
 using Core.Entities;
 using Core.Interfaces;
@@ -24,9 +25,7 @@ public class ProductBrandsController(IProductBrandsService productBrandsService)
         if (!string.IsNullOrEmpty(queries.Name)) predicate = p => p.Name.Contains(queries.Name);
 
         var productBrands = await _productBrandsService.GetListAsync(
-            predicate,
-            productBrands => new { productBrands.Name },
-            queries
+            new BaseSpecification<ProductBrand>(pagination: queries)
         );
         return Ok(productBrands);
     }
