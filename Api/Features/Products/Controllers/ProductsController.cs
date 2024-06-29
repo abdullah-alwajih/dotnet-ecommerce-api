@@ -13,7 +13,7 @@ namespace Api.Features.Products.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ProductsController(IProductService productService, IMapper mapper) : ControllerBase
+public class ProductsController(IProductService productService) : ControllerBase
 {
     // GET: api/<ProductsController>
     [HttpGet]
@@ -22,9 +22,8 @@ public class ProductsController(IProductService productService, IMapper mapper) 
         try
         {
             var response = await productService.GetListAsync(
-                new BaseSpecification<Product>(pagination: queries)
+                new ProductsWithBrandAndTypeSpecification(queries)
             );
-
             return Ok(response);
         }
         catch (Exception ex)
@@ -41,7 +40,8 @@ public class ProductsController(IProductService productService, IMapper mapper) 
         {
             var response = await productService.GetByIdAsync
             (
-                id
+                id,
+                new BaseSpecification<Product, Product>()
             );
             return Ok(response);
         }

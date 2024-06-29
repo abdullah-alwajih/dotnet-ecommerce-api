@@ -20,12 +20,9 @@ public class ProductBrandsController(IProductBrandsService productBrandsService)
     [HttpGet]
     public async Task<IActionResult> Get([FromQuery] BaseQueries queries)
     {
-        Expression<Func<ProductBrand, bool>>? predicate = null;
-
-        if (!string.IsNullOrEmpty(queries.Name)) predicate = p => p.Name.Contains(queries.Name);
-
+       
         var productBrands = await _productBrandsService.GetListAsync(
-            new BaseSpecification<ProductBrand>(pagination: queries)
+            new BaseSpecification<ProductBrand, ProductBrand>(pagination: queries)
         );
         return Ok(productBrands);
     }

@@ -4,11 +4,11 @@ using Core.Helpers;
 
 namespace Core.Interfaces;
 
-public interface IGenericRepository<T, TDto> where T : BaseEntity
+public interface IGenericRepository<T> where T : BaseEntity
 {
-    Task<IResultList<TDto>> GetListAsync(ISpecification<T> specification);
+    Task<IResultList<TDto>> GetListAsync<TDto>(ISpecification<T, TDto> specification);
 
-    Task<TDto> GetByIdAsync(int id);
+    Task<TDto> GetByIdAsync<TDto>(int id,  ISpecification<T, TDto> specification);
 
     Task AddAsync(T entity);
     Task UpdateAsync(T entity);

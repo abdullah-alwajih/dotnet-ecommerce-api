@@ -4,6 +4,6 @@ using Core.Interfaces;
 
 namespace Api.Features.Products.Repositories;
 
-public interface IProductTypesRepository : IGenericRepository<ProductType, ProductTypeDto>
+public interface IProductTypesRepository : IGenericRepository<ProductType>
 {
 }

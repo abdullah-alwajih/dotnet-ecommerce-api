@@ -648,4 +648,3 @@ C:/Users/Abdullah/source/repos/eCommerce/Api/bin/Debug/net8.0/Core.pdb
 /Users/kaito/RiderProjects/dotnet-ecommerce-api/Api/obj/Debug/net8.0/Api.genruntimeconfig.cache
 /Users/kaito/RiderProjects/dotnet-ecommerce-api/Api/obj/Debug/net8.0/ref/Api.dll
 /Users/kaito/RiderProjects/dotnet-ecommerce-api/Api/bin/Debug/net8.0/AutoMapper.dll
-/Users/kaito/RiderProjects/dotnet-ecommerce-api/Api/bin/Debug/net8.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll

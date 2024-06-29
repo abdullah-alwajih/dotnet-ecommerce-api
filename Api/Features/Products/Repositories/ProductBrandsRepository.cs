@@ -6,5 +6,5 @@ using Infrastructure.Data;
 
 namespace Api.Features.Products.Repositories;
 
-public class ProductBrandsRepository(ApplicationDbContext context, IMapper mapper)
-    : GenericRepository<ProductBrand, ProductBrandDto>(context, mapper), IProductBrandsRepository;
+public class ProductBrandsRepository(ApplicationDbContext context)
+    : GenericRepository<ProductBrand>(context), IProductBrandsRepository;

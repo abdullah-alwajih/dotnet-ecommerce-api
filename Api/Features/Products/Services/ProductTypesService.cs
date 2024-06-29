@@ -6,6 +6,6 @@ using Core.Interfaces;
 namespace Api.Features.Products.Services;
 
 public class ProductTypesService(IProductTypesRepository productTypesRepository)
-    : BaseService<ProductType, ProductTypeDto>(productTypesRepository), IProductTypesService
+    : BaseService<ProductType>(productTypesRepository), IProductTypesService
 {
 }

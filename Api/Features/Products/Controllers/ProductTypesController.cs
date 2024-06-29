@@ -16,7 +16,7 @@ public class ProductTypesController(IProductTypesService productTypesService) : 
     public async Task<IActionResult> Get([FromQuery] BaseQueries queries)
     {
         var productTypes = await productTypesService.GetListAsync(
-           new BaseSpecification<ProductType>(pagination: queries)
+           new BaseSpecification<ProductType, ProductType>(pagination: queries)
         );
         return Ok(productTypes);
     }

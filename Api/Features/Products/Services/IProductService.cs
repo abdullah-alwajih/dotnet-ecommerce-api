@@ -4,6 +4,6 @@ using Core.Interfaces;
 
 namespace Api.Features.Products.Services;
 
-public interface IProductService: IBaseService<Product, ProductDto>
+public interface IProductService: IBaseService<Product>
 {
 }

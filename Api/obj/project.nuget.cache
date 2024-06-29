@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "pr/5+YkScGdcFfmkI79ah8SomMacCptxLthLicz3dbVfkiPTTdZnS6w3RfGbhSrhmnXdnQQ/kDIzkNNhFl0rLQ==",
+  "dgSpecHash": "XytOjVB5WsxX5nCGDREDABRTcf97K9v2q+stMB26qE9OFhGSf43k4lirGLxm1Czus6D1jXXB3Ol1sesEslRHFw==",
   "success": true,
   "projectFilePath": "/Users/kaito/RiderProjects/dotnet-ecommerce-api/Api/Api.csproj",
   "expectedPackageFiles": [
     "/Users/kaito/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
-    "/Users/kaito/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "/Users/kaito/.nuget/packages/humanizer/2.14.1/humanizer.2.14.1.nupkg.sha512",
     "/Users/kaito/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/kaito/.nuget/packages/humanizer.core.af/2.14.1/humanizer.core.af.2.14.1.nupkg.sha512",

@@ -7,8 +7,9 @@ using Core.Interfaces;
 namespace Api.Features.Products.specifications;
 
 public class ProductsWithBrandAndTypeSpecification(BaseQueries queries)
-    : BaseSpecification<Product>(
+    : BaseSpecification<Product, ProductDto>(
         criteria: ProductSpecifications.DefaultCriteria(queries),
+        select: ProductSpecifications.ToProductDto,
         pagination: queries);
 
 public abstract class ProductSpecifications
@@ -20,21 +21,24 @@ public abstract class ProductSpecifications
                     (!queries.Price.HasValue || p.Price < queries.Price.Value);
     }
 
-
-    public static Expression<Func<Product, ProductDto>> ToProductDto(IMapper mapper)
+    
+    
+    public static Expression<Func<Product, ProductDto>> ToProductDto => product => new ProductDto
+        
     {
-        return product => new ProductDto
-
+        Id = product.Id,
+        Name = product.Name,
+        Price = product.Price,
+        ProductBrand = product.ProductBrand == null ? null : new ProductBrandDto
         {
-            Id = product.Id,
-            Name = product.Name,
-            Price = product.Price,
-            ProductBrand = product.ProductBrand == null
-                ? null
-                : mapper.Map<ProductBrand, ProductBrandDto>(product.ProductBrand),
-            ProductType = product.ProductType == null
-                ? null
-                : mapper.Map<ProductType, ProductTypeDto>(product.ProductType)
-        };
-    }
+            Id = product.ProductBrand.Id,
+            Name = product.ProductBrand.Name
+        },
+        ProductType = product.ProductType == null ? null : new ProductTypeDto
+        {
+            Id = product.ProductType.Id,
+            Name = product.ProductType.Name
+        }
+    };
+
 }

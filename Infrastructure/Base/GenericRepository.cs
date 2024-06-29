@@ -1,26 +1,23 @@
 ﻿using System.Linq.Expressions;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Core.Entities;
 using Core.Helpers;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Interfaces;
 
-public class GenericRepository<TEntity, TDto> : IGenericRepository<TEntity, TDto> where TEntity : BaseEntity
+public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
 {
     private readonly DbContext _context;
-    private readonly IMapper _mapper;
     private readonly DbSet<TEntity> _dbSet;
 
-    protected GenericRepository(DbContext context, IMapper mapper)
+    protected GenericRepository(DbContext context)
     {
         _context = context;
-        _mapper = mapper;
         _dbSet = _context.Set<TEntity>();
     }
 
-    public virtual async Task<IResultList<TDto>> GetListAsync(ISpecification<TEntity> specification)
+    public virtual async Task<IResultList<TDto>> GetListAsync<TDto>(ISpecification<TEntity, TDto> specification)
     {
         var baseQuery = _dbSet.AsNoTracking();
 
@@ -29,7 +26,7 @@ public class GenericRepository<TEntity, TDto> : IGenericRepository<TEntity, TDto
 
 
         // Apply the projection if provided, else project to the same type
-        var finalQuery = baseQuery.ProjectTo<TDto>(_mapper.ConfigurationProvider);
+        var finalQuery = specification.Select != null ? baseQuery.Select(specification.Select) : baseQuery.Cast<TDto>();
 
 
 
@@ -55,15 +52,20 @@ public class GenericRepository<TEntity, TDto> : IGenericRepository<TEntity, TDto
     }
 
 
-    public virtual async Task<TDto> GetByIdAsync(int id)
+    public virtual async Task<TDto> GetByIdAsync<TDto>(int id, ISpecification<TEntity, TDto> specification)
     {
-        var result = await _dbSet.AsNoTracking()
+        var query = _dbSet.AsNoTracking();
+
+        // If selector is null, use an expression that selects the entity itself
+        specification.Select ??= query => (TDto)(object)query;
+
+        var result = await query
             .Where(entity => EF.Property<int>(entity, "Id") == id)
-            .ProjectTo<TDto>(_mapper.ConfigurationProvider)
+            .Select(specification.Select)
             .FirstOrDefaultAsync();
-        
-        return result ??
-               throw new KeyNotFoundException($"{typeof(TEntity).Name} with ID {id} not found.");
+
+        return result ?? throw new KeyNotFoundException($"{typeof(TEntity).Name} with ID {id} not found.");
+
     }
 
     public virtual async Task AddAsync(TEntity entity)
@@ -82,4 +84,14 @@ public class GenericRepository<TEntity, TDto> : IGenericRepository<TEntity, TDto
         _dbSet.Remove(entity);
         await _context.SaveChangesAsync();
     }
+    
+    private IQueryable<TResult> DefaultProjection<TResult>(IQueryable<TEntity> query)
+    {
+        // Check if TResult is the same as TEntity, allowing direct casting
+        if (typeof(TResult) == typeof(TEntity))
+            return (IQueryable<TResult>)query;
+        throw new InvalidOperationException(
+            "A select expression must be provided when TResult is not of type TEntity.");
+    }
+    
 }
