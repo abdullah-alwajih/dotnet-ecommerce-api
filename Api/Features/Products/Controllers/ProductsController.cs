@@ -1,11 +1,12 @@
 ﻿using System.Linq.Expressions;
 using Api.Features.Products.DTOs;
 using Api.Features.Products.Services;
-using Api.Features.Products.specifications;
+using Api.Features.Products.Specifications;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,8 +14,11 @@ namespace Api.Features.Products.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ProductsController(IProductService productService) : ControllerBase
+public class ProductsController(IProductService productService, IOptions<ImageSettings> imageSettings)
+    : ControllerBase
 {
+    private readonly ImageSettings _imageSettings = imageSettings.Value;
+
     // GET: api/<ProductsController>
     [HttpGet]
     public async Task<IActionResult> Get([FromQuery] BaseQueries queries)
@@ -22,7 +26,7 @@ public class ProductsController(IProductService productService) : ControllerBase
         try
         {
             var response = await productService.GetListAsync(
-                new ProductsWithBrandAndTypeSpecification(queries)
+                new ProductsWithBrandAndTypeSpecification(queries, _imageSettings)
             );
             return Ok(response);
         }
